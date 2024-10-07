@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %} Coffee Headquarters {% endblock %}
+{% block content %}
+
+<h1 class="text-center mt-4">Welcome to Coffee HQ</h1>
+
+<a class="btn btn-primary mb-4" href="{% url 'tweet_create' %}">
+  Brew a Tweet
+</a>
+
+<div class="container row gap-3">
+  {% for tweet in tweets %}
+    <div class="card" style="width: 22rem">
+      {% if tweet.photo %}
+      <img src="{{ tweet.photo.url }}" class="card-img-top" alt="Tweet photo"
+           style="height: 160px; width: 12rem; object-fit: cover;" />
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title">{{ tweet.user.username }}</h5>
+        <p class="card-text" style="height: auto; width: auto">{{ tweet.text }}</p>
+        {% if tweet.user == user %}
+        <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

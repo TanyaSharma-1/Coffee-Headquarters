@@ -1,0 +1,13 @@
+{% extends "layout.html" %} {% block title %} Coffee Headquarters {% endblock %}
+{% block content %}
+<h1 class="text-center mt-4">Welcome to Coffee HQ</h1>
+
+<h2>
+  {%if form.instance.pk %} Edit Tweet {% else %} Brew Tweet {% endif %}
+  <form method="post" enctype="multipart/form-data" class="form">
+    {% csrf_token %} {{ form.as_p }}
+    <button class="btn btn-warning" type="submit">Serve</button>
+  </form>
+  <a href="{% url 'tweet_list' %}"> Return to Coffee Stories </a>
+</h2>
+{% endblock %}
